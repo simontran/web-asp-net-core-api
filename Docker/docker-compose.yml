@@ -1,0 +1,38 @@
+version: '3.9'
+services:
+    db:
+        image: postgres:15.1-alpine
+        container_name: postgresql01
+        # automatically restarts the container - Docker deamon on restart or
+        # the container itself is manually restarted
+        restart: always
+        environment:
+          - "POSTGRES_USER=root"
+          - "POSTGRES_PASSWORD=@Pas5word"
+          - "POSTGRES_DB=suntac"
+        networks:
+          - default
+          - service-proxy
+        ports:
+          - "5432:5432"
+        volumes:
+          - "./db:/var/lib/postgresql/data"
+    pgadmin:
+        image: dpage/pgadmin4
+        container_name: pgadmin4
+        restart: always
+        environment:
+          - "PGADMIN_DEFAULT_EMAIL=root@root.com"
+          - "PGADMIN_DEFAULT_PASSWORD=@Pas5word"
+          # PGADMIN_LISTEN_PORT = 80
+        ports:
+          - "5050:80"
+        volumes:
+          - "./pgadmin:/var/lib/pgadmin"
+volumes:
+  db:
+    driver: local
+  pgadmin:
+    driver: local
+networks:
+  service-proxy:
