@@ -80,18 +80,24 @@ namespace SampleAPI.Core.PresentationLayer
                 app.UseDeveloperExceptionPage();
             }
             
+            // Global cors policy
+            app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+
+            #region Configure HTTP request pipeline (Middleware) in HERE
             // Ensure database and tables exist
             {
                 //using var scope = app.ApplicationServices.CreateScope();
                 //var context = scope.ServiceProvider.GetRequiredService<DataContext>();
                 //await context.Init();
             }
-            
-            // Global cors policy
-            app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
-           
+
             // Global error handler
             app.UseMiddleware<ErrorHandlerMiddleware>();
+
+            // Secure by using API Key Authentication
+            app.UseMiddleware<ApiKeyMiddleware>();
+
+            #endregion
 
             app.UseHttpsRedirection();
             app.UseRouting();
