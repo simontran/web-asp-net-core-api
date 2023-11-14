@@ -27,7 +27,7 @@ namespace SampleAPI.Core.DomainLayer.Data
         /// <returns></returns>
         public IDbConnection CreateConnection()
         {
-            var connectionString = $"Host={postgresDbSettings.Server}; Database={postgresDbSettings.Database}; Username={postgresDbSettings.UserId}; Password={postgresDbSettings.Password};";
+            var connectionString = $"Host={postgresDbSettings.Server}; Port={postgresDbSettings.Port}; Database={postgresDbSettings.Database}; Username={postgresDbSettings.UserId}; Password={postgresDbSettings.Password};";
             return new NpgsqlConnection(connectionString);
         }
 
@@ -48,7 +48,7 @@ namespace SampleAPI.Core.DomainLayer.Data
         private async Task InitDatabase()
         {
             // Create database if it doesn't exist
-            var connectionString = $"Host={postgresDbSettings.Server}; Database=template1; Username={postgresDbSettings.UserId}; Password={postgresDbSettings.Password};";
+            var connectionString = $"Host={postgresDbSettings.Server}; Port={postgresDbSettings.Port}; Database=template1; Username={postgresDbSettings.UserId}; Password={postgresDbSettings.Password};";
             using var connection = new NpgsqlConnection(connectionString);
             var sqlDbCount = $"SELECT COUNT(*) FROM pg_database WHERE datname = '{postgresDbSettings.Database}';";
             var dbCount = await connection.ExecuteScalarAsync<int>(sqlDbCount);
