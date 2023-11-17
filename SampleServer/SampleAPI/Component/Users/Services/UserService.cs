@@ -3,7 +3,7 @@ using SampleAPI.Core.ServiceLayer.Services;
 using SampleAPI.Component.DomainLayer.Models.Entities;
 using SampleAPI.Component.DomainLayer.Models;
 using SampleAPI.Component.RepositoryLayer.Repository;
-using SampleAPI.Core.ServiceLayer.Helpers;
+using SampleAPI.Core.Common.Helpers;
 
 namespace SampleAPI.Component.ServiceLayer.Services
 {

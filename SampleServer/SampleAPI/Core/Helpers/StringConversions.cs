@@ -1,4 +1,4 @@
-﻿namespace SampleAPI.Core.ServiceLayer.Helpers
+﻿namespace SampleAPI.Core.Common.Helpers
 {
     public class StringConversions
     {

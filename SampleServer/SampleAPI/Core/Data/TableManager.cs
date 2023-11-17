@@ -15,7 +15,7 @@ namespace SampleAPI.Core.DomainLayer.Data
                 }
                 catch
                 {
-                    //log errors or ...
+                    // log errors or ...
                     throw;
                 }
             }

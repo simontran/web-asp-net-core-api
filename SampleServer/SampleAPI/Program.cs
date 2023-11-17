@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 using SampleAPI.Core.DomainLayer.Data;
-using SampleAPI.Core.ServiceLayer.Helpers;
+using SampleAPI.Core.Common.Helpers;
 using SampleAPI.Core.ServiceLayer.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -25,12 +25,12 @@ var builder = WebApplication.CreateBuilder(args);
     services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
     // Configure strongly typed settings object
-    services.Configure<DbSettings>(builder.Configuration.GetSection("DbSettings"));
+    services.Configure<AppSettings>(builder.Configuration.GetSection("DbSettings"));
 
     // Configure DI for application services
     services.AddSingleton<DataContext>();
     // Ensure database exist
-    services.AddSingleton<DbInit>();
+    services.AddSingleton<DataInit>();
     services.AddInfrastructure();
 }
 
@@ -61,7 +61,7 @@ var app = builder.Build();
 // Ensure database exist
 using (var scope = app.Services.CreateScope())
 {
-    var context = scope.ServiceProvider.GetRequiredService<DbInit>();
+    var context = scope.ServiceProvider.GetRequiredService<DataInit>();
     context.CreateDatabase();
 }
 // Ensure table exist

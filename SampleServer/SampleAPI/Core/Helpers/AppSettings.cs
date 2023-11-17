@@ -1,7 +1,8 @@
-﻿namespace SampleAPI.Core.DomainLayer.Data
+﻿namespace SampleAPI.Core.Common.Helpers
 {
-    public class DbSettings
+    public class AppSettings
     {
+        // Define your application settings properties here
         public string? Server { get; set; }
         public string? Port { get; set; }
         public string? Database { get; set; }

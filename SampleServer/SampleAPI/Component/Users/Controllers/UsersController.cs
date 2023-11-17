@@ -9,46 +9,50 @@ namespace SampleAPI.Component.RepositoryLayer.Controllers
     public class UsersController : ControllerBase
     {
         #region Property
-        private readonly UserService userService;
+        private readonly UserService _service;
         #endregion
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="service"></param>
         public UsersController(UserService service)
         {
-            userService = service;
+            this._service = service;
         }
 
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            var users = await userService.GetAll();
+            var users = await this._service.GetAll();
             return Ok(users);
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
-            var user = await userService.GetById(id);
+            var user = await this._service.GetById(id);
             return Ok(user);
         }
 
         [HttpPost]
         public async Task<IActionResult> Create(CreateUser model)
         {
-            await userService.Create(model);
+            await this._service.Create(model);
             return Ok(new { message = "User created." });
         }
 
         [HttpPut("{id}")]
         public async Task<IActionResult> Update(int id, UpdateUser model)
         {
-            await userService.Update(id, model);
+            await this._service.Update(id, model);
             return Ok(new { message = "User updated." });
         }
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
-            await userService.Delete(id);
+            await this._service.Delete(id);
             return Ok(new { message = "User deleted." });
         }
     }

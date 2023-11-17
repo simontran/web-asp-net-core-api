@@ -6,28 +6,28 @@ using SampleAPI.Component.DomainLayer.Models.Entities;
 
 namespace SampleAPI.Component.RepositoryLayer.Repository
 {
-    public class UserRepository : IRepository<User>
+    public class UserRepository : Repository<User>
     {
         #region Property
-        private readonly DataContext userContext;
+        private readonly DataContext _context;
         #endregion
 
         /// <summary>
-        /// Constructor
+        /// Constructor get instance of context
         /// </summary>
         /// <param name="context"></param>
-        public UserRepository(DataContext context)
+        public UserRepository(DataContext context) : base(context)
         {
-            userContext = context;
+            this._context = context;
         }
 
         /// <summary>
-        /// GetAll
+        /// Get All User
         /// </summary>
         /// <returns></returns>
-        public async Task<IEnumerable<User>> GetAll()
+        public new async Task<IEnumerable<User>> GetAll()
         {
-            using var connection = userContext.CreateConnection();
+            using var connection = this._context.CreateConnection();
             // Build the SQL string
             StringBuilder sql = new();
             sql.AppendLine("SELECT * ");
@@ -36,45 +36,45 @@ namespace SampleAPI.Component.RepositoryLayer.Repository
         }
 
         /// <summary>
-        /// GetById
+        /// Get User By Id
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public async Task<User> GetById(int id)
+        public new async Task<User> GetById(int id)
         {
-            using var connection = userContext.CreateConnection();
+            using var connection = this._context.CreateConnection();
             // Build the SQL string
             StringBuilder sql = new();
             sql.AppendLine("SELECT * ");
             sql.AppendLine("  FROM Users ");
             sql.AppendLine(" WHERE Id = @id ");
-            return await connection.QuerySingleOrDefaultAsync<User>(sql.ToString(), new { id });
+            return await connection?.QuerySingleOrDefaultAsync<User>(sql.ToString(), new { id });
         }
 
         /// <summary>
-        /// GetByEmail
+        /// Get User By Email
         /// </summary>
         /// <param name="email"></param>
         /// <returns></returns>
         public async Task<User> GetByEmail(string email)
         {
-            using var connection = userContext.CreateConnection();
+            using var connection = this._context.CreateConnection();
             // Build the SQL string
             StringBuilder sql = new();
             sql.AppendLine("SELECT * ");
             sql.AppendLine("  FROM Users ");
             sql.AppendLine(" WHERE Email = @email ");
-            return await connection.QuerySingleOrDefaultAsync<User>(sql.ToString(), new { email });
+            return await connection?.QuerySingleOrDefaultAsync<User>(sql.ToString(), new { email });
         }
 
         /// <summary>
-        /// Create
+        /// Insert new User
         /// </summary>
         /// <param name="user"></param>
         /// <returns></returns>
-        public async Task Create(User user)
+        public new async Task Create(User user)
         {
-            using var connection = userContext.CreateConnection();
+            using var connection = this._context.CreateConnection();
             // Build the SQL string
             StringBuilder sql = new();
             sql.AppendLine("INSERT INTO Users ( ");
@@ -96,13 +96,13 @@ namespace SampleAPI.Component.RepositoryLayer.Repository
         }
 
         /// <summary>
-        /// Update
+        /// Update User
         /// </summary>
         /// <param name="user"></param>
         /// <returns></returns>
-        public async Task Update(User user)
+        public new async Task Update(User user)
         {
-            using var connection = userContext.CreateConnection();
+            using var connection = this._context.CreateConnection();
             // Build the SQL string
             StringBuilder sql = new();
             sql.AppendLine("UPDATE Users ");
@@ -117,13 +117,13 @@ namespace SampleAPI.Component.RepositoryLayer.Repository
         }
 
         /// <summary>
-        /// Delete
+        /// Delete User
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public async Task Delete(int id)
+        public new async Task Delete(int id)
         {
-            using var connection = userContext.CreateConnection();
+            using var connection = this._context.CreateConnection();
             // Build the SQL string
             StringBuilder sql = new();
             sql.AppendLine("DELETE FROM Users ");

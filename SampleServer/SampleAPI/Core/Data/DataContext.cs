@@ -1,24 +1,23 @@
 ﻿using System.Data;
-using Dapper;
 using Npgsql;
 using Microsoft.Extensions.Options;
-using System.Text;
+using SampleAPI.Core.Common.Helpers;
 
 namespace SampleAPI.Core.DomainLayer.Data
 {
     public class DataContext
     {
         #region Property
-        private readonly DbSettings postgresDbSettings;
+        private readonly AppSettings _appSettings;
         #endregion
 
         /// <summary>
         /// Constructor
         /// </summary>
-        /// <param name="dbSettings"></param>
-        public DataContext(IOptions<DbSettings> dbSettings)
+        /// <param name="appSettings"></param>
+        public DataContext(IOptions<AppSettings> appSettings)
         {
-            postgresDbSettings = dbSettings.Value;
+            this._appSettings = appSettings.Value;
         }
 
         /// <summary>
@@ -27,7 +26,7 @@ namespace SampleAPI.Core.DomainLayer.Data
         /// <returns></returns>
         public IDbConnection CreateConnection()
         {
-            var connectionString = $"Host={postgresDbSettings.Server}; Port={postgresDbSettings.Port}; Database={postgresDbSettings.Database}; Username={postgresDbSettings.UserId}; Password={postgresDbSettings.Password};";
+            var connectionString = $"Host={this._appSettings.Server}; Port={this._appSettings.Port}; Database={this._appSettings.Database}; Username={this._appSettings.UserId}; Password={this._appSettings.Password};";
             return new NpgsqlConnection(connectionString);
         }
     }

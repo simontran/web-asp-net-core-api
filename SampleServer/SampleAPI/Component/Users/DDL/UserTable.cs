@@ -16,7 +16,7 @@ namespace SampleAPI.Component.DDL
         /// <param name="context"></param>
         public UserTable(DataContext context)
         {
-            _context = context;
+            this._context = context;
         }
 
         /// <summary>
@@ -24,7 +24,7 @@ namespace SampleAPI.Component.DDL
         /// </summary>
         public void CreateTable()
         {
-            using var connection = _context.CreateConnection();
+            using var connection = this._context.CreateConnection();
             // Build the SQL string
             StringBuilder sql = new();
             sql.AppendLine("CREATE TABLE IF NOT EXISTS ");

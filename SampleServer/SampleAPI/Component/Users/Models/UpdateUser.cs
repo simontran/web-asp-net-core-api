@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using SampleAPI.Component.DomainLayer.Models.Entities;
-using SampleAPI.Core.ServiceLayer.Helpers;
+using SampleAPI.Core.Common.Helpers;
 
 namespace SampleAPI.Component.DomainLayer.Models
 {

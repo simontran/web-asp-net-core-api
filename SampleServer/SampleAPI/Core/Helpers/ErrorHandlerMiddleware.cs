@@ -1,7 +1,7 @@
 ﻿using System.Net;
 using System.Text.Json;
 
-namespace SampleAPI.Core.ServiceLayer.Helpers
+namespace SampleAPI.Core.Common.Helpers
 {
     public class ErrorHandlerMiddleware
     {
