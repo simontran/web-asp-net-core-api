@@ -9,12 +9,12 @@ namespace SampleAPI.Component.ServiceLayer.Services
         public UserProfile()
         {            
             #region CreateRequest -> User
-            CreateMap<CreateRequest, User>();
+            CreateMap<CreateUser, User>();
 
             #endregion
 
             #region UpdateRequest -> User
-            CreateMap<UpdateRequest, User>()
+            CreateMap<UpdateUser, User>()
                 .ForAllMembers(x => x.Condition(
                     (src, dest, prop) =>
                     {

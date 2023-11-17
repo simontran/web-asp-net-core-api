@@ -32,14 +32,14 @@ namespace SampleAPI.Component.RepositoryLayer.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(CreateRequest model)
+        public async Task<IActionResult> Create(CreateUser model)
         {
             await userService.Create(model);
             return Ok(new { message = "User created." });
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update(int id, UpdateRequest model)
+        public async Task<IActionResult> Update(int id, UpdateUser model)
         {
             await userService.Update(id, model);
             return Ok(new { message = "User updated." });

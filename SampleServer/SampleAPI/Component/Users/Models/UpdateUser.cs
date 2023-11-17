@@ -4,7 +4,7 @@ using SampleAPI.Core.ServiceLayer.Helpers;
 
 namespace SampleAPI.Component.DomainLayer.Models
 {
-    public class UpdateRequest
+    public class UpdateUser
     {
         public string? Title { get; set; }
         public string? FirstName { get; set; }

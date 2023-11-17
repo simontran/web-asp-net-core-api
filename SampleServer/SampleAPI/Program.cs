@@ -1,8 +1,7 @@
 using System.Text.Json.Serialization;
 using SampleAPI.Core.DomainLayer.Data;
 using SampleAPI.Core.ServiceLayer.Helpers;
-using SampleAPI.Component.RepositoryLayer.Repository;
-using SampleAPI.Component.ServiceLayer.Services;
+using SampleAPI.Core.ServiceLayer.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
@@ -29,21 +28,13 @@ var builder = WebApplication.CreateBuilder(args);
     services.Configure<DbSettings>(builder.Configuration.GetSection("DbSettings"));
 
     // Configure DI for application services
-    #region Register Dependent Types (Services) with IoC Container in HERE
     services.AddSingleton<DataContext>();
-    services.AddScoped<UserRepository, UserRepository>();
-    services.AddScoped<UserService, UserService>();
-
-    #endregion
+    // Ensure database exist
+    services.AddSingleton<DbInit>();
+    services.AddInfrastructure();
 }
 
 var app = builder.Build();
-// Ensure database and tables exist
-{
-    //using var scope = app.Services.CreateScope();
-    //var context = scope.ServiceProvider.GetRequiredService<DataContext>();
-    //await context.Init();
-}
 // Configure the HTTP request pipeline.
 {
     if (app.Environment.IsDevelopment())
@@ -66,4 +57,14 @@ var app = builder.Build();
 
     app.MapControllers();
 }
+
+// Ensure database exist
+using (var scope = app.Services.CreateScope())
+{
+    var context = scope.ServiceProvider.GetRequiredService<DbInit>();
+    context.CreateDatabase();
+}
+// Ensure table exist
+app.TableInit();
+
 app.Run();

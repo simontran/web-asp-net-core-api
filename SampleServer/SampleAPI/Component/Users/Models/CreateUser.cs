@@ -3,7 +3,7 @@ using SampleAPI.Component.DomainLayer.Models.Entities;
 
 namespace SampleAPI.Component.DomainLayer.Models
 {
-    public class CreateRequest
+    public class CreateUser
     {
         [Required]
         public string? Title { get; set; }

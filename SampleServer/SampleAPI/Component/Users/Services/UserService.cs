@@ -7,7 +7,7 @@ using SampleAPI.Core.ServiceLayer.Helpers;
 
 namespace SampleAPI.Component.ServiceLayer.Services
 {
-    public class UserService : IService<User, CreateRequest, UpdateRequest>
+    public class UserService : IService<User, CreateUser, UpdateUser>
     {
         #region Property
         private readonly UserRepository userRepository;
@@ -53,7 +53,7 @@ namespace SampleAPI.Component.ServiceLayer.Services
         /// <param name="model"></param>
         /// <returns></returns>
         /// <exception cref="AppException"></exception>
-        public async Task Create(CreateRequest model)
+        public async Task Create(CreateUser model)
         {
             // Validate
             if (await userRepository.GetByEmail(model.Email!) != null)
@@ -75,7 +75,7 @@ namespace SampleAPI.Component.ServiceLayer.Services
         /// <param name="id"></param>
         /// <param name="model"></param>
         /// <returns></returns>
-        public async Task Update(int id, UpdateRequest model)
+        public async Task Update(int id, UpdateUser model)
         {
             var user = await userRepository.GetById(id) ?? throw new KeyNotFoundException("User not found.");
 
