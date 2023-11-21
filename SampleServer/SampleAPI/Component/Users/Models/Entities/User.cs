@@ -1,7 +1,7 @@
 ﻿using System.Text.Json.Serialization;
 using SampleAPI.Core.DomainLayer.Models.Entities;
 
-namespace SampleAPI.Component.DomainLayer.Models.Entities
+namespace SampleAPI.Component.Users.Models.Entities
 {
     public class User : BaseEntity
     {

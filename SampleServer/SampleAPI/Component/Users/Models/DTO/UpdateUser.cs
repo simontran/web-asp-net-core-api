@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using SampleAPI.Component.DomainLayer.Models.Entities;
+using SampleAPI.Component.Users.Models.Entities;
 using SampleAPI.Core.Common.Helpers;
 
-namespace SampleAPI.Component.DomainLayer.Models
+namespace SampleAPI.Component.Users.Models.DTO
 {
     public class UpdateUser
     {

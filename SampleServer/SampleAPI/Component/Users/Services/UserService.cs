@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
 using SampleAPI.Core.ServiceLayer.Services;
-using SampleAPI.Component.DomainLayer.Models.Entities;
-using SampleAPI.Component.DomainLayer.Models;
 using SampleAPI.Component.RepositoryLayer.Repository;
 using SampleAPI.Core.Common.Helpers;
+using SampleAPI.Component.Users.Models.DTO;
+using SampleAPI.Component.Users.Models.Entities;
 
 namespace SampleAPI.Component.ServiceLayer.Services
 {

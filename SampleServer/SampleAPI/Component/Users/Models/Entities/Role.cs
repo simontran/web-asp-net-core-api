@@ -1,4 +1,4 @@
-﻿namespace SampleAPI.Component.DomainLayer.Models.Entities
+﻿namespace SampleAPI.Component.Users.Models.Entities
 {
     public enum Role
     {

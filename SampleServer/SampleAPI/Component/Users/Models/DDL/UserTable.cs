@@ -2,7 +2,7 @@
 using SampleAPI.Core.DomainLayer.Data;
 using System.Text;
 
-namespace SampleAPI.Component.DDL
+namespace SampleAPI.Component.Users.Models.DDL
 {
     public class UserTable
     {
@@ -16,7 +16,7 @@ namespace SampleAPI.Component.DDL
         /// <param name="context"></param>
         public UserTable(DataContext context)
         {
-            this._context = context;
+            _context = context;
         }
 
         /// <summary>
@@ -24,7 +24,7 @@ namespace SampleAPI.Component.DDL
         /// </summary>
         public void CreateTable()
         {
-            using var connection = this._context.CreateConnection();
+            using var connection = _context.CreateConnection();
             // Build the SQL string
             StringBuilder sql = new();
             sql.AppendLine("CREATE TABLE IF NOT EXISTS ");

@@ -1,4 +1,4 @@
-﻿using SampleAPI.Component.DDL;
+﻿using SampleAPI.Component.Users.Models.DDL;
 
 namespace SampleAPI.Core.DomainLayer.Data
 {

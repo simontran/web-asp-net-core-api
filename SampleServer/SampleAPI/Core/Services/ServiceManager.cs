@@ -1,6 +1,6 @@
-﻿using SampleAPI.Component.DDL;
-using SampleAPI.Component.RepositoryLayer.Repository;
+﻿using SampleAPI.Component.RepositoryLayer.Repository;
 using SampleAPI.Component.ServiceLayer.Services;
+using SampleAPI.Component.Users.Models.DDL;
 
 namespace SampleAPI.Core.ServiceLayer.Services
 {

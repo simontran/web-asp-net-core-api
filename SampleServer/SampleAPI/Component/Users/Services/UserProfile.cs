@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using SampleAPI.Component.DomainLayer.Models;
-using SampleAPI.Component.DomainLayer.Models.Entities;
+using SampleAPI.Component.Users.Models.DTO;
+using SampleAPI.Component.Users.Models.Entities;
 
 namespace SampleAPI.Component.ServiceLayer.Services
 {

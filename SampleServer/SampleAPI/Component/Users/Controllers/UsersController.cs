@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using SampleAPI.Component.DomainLayer.Models;
 using SampleAPI.Component.ServiceLayer.Services;
+using SampleAPI.Component.Users.Models.DTO;
 
 namespace SampleAPI.Component.RepositoryLayer.Controllers
 {
