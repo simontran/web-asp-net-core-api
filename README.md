@@ -1,6 +1,5 @@
-# web-asp-net-core-api
-WebAPI - ASP.Net Core
+# signalR
+New WebSocket
 ------------------------------
-v1.0    Divide components into subprojects
-
-v2.0    Divide components into subfolders
+https://www.c-sharpcorner.com/article/signalr-introduction-and-implementation-using-the-net-core-6-web-api-and-angula/
+https://www.c-sharpcorner.com/article/understanding-signalr-from-scratch/
