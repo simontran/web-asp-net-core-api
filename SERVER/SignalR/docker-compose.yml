@@ -1,0 +1,32 @@
+version: '3.4'
+
+networks:
+  v1.0:
+    driver: bridge
+volumes:
+  app:
+    driver: local
+
+services:
+  # app
+  app:
+    # cmd for get image
+    # >docker build -f Dockerfile -t signalr:v1.0 .
+    # cmd for run app
+    # >docker run -it --rm -p 8080:80 signalr:v1.0
+    # build and run single service
+    # docker-compose up -d --force-recreate --no-deps --build <service_name>
+    image: docker.io/library/signalr:v1.0
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: signalr-v1.0
+    ports:
+      - "8080:80"
+    environment:
+      - "CONNECTION_STRING=..."
+      - "ASP_NET_CORE_URL=http://+:80"
+    networks:
+      - v1.0
+    volumes:
+      - "./app:/app/publish"
