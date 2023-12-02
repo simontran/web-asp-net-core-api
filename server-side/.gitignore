@@ -1,0 +1,5 @@
+.dockerignore
+.vs/
+_*
+TodoWebApiRestful/bin/
+TodoWebApiRestful/obj/

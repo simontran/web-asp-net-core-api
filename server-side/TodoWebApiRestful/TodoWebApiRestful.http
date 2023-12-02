@@ -1,0 +1,6 @@
+@TodoWebApiRestful_HostAddress = http://localhost:5200
+
+GET {{TodoWebApiRestful_HostAddress}}/login/
+Accept: application/json
+
+###
