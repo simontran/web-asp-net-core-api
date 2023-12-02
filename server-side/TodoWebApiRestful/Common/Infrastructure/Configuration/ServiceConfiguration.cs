@@ -51,6 +51,9 @@ namespace TodoWebApiRestful.Common.InfrastructureLayer.Configuration
             services.AddSingleton<TodoTblService>();
             services.AddScoped<TodoService>();
 
+            services.AddTransient<ITodoRepository, TodoRepository>();
+            services.AddTransient<IUnitOfWork, UnitOfWork>();
+
             #endregion
         }
     }
