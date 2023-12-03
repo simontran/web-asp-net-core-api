@@ -1,5 +1,7 @@
 .dockerignore
 .vs/
+.DS_Store
 _*
 TodoWebApiRestful/bin/
 TodoWebApiRestful/obj/
+TodoWebApiRestful/.DS_Store/
