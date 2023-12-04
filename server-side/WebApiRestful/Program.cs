@@ -1,4 +1,5 @@
 using WebApiRestful.Domain.Entities.Common;
+using WebApiRestful.Helpers;
 using WebApiRestful.Infrastructure.Configuration;
 using WebApiRestful.Infrastructure.Extensions;
 
@@ -38,6 +39,12 @@ var app = builder.Build();
     app.MapControllers();
 
     #region Configure mores at HERE
+    // Global cors policy
+    app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+
+    // Global error handler
+    app.UseMiddleware<ErrorHandlerMiddleware>();
+
     // Ensure database & tables exist
     app.DbInitialize();
 
