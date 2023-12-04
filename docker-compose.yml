@@ -1,0 +1,68 @@
+version: '3.4'
+
+networks:
+  dev:
+    driver: bridge
+  service-proxy:
+volumes:
+  db:
+    driver: local
+  pgadmin:
+    driver: local
+
+services:
+  # app
+  webapi:
+    # cmd for get image
+    # >docker build -f server-side/WebApiRestful/Dockerfile -t todo:v1.0 .
+    # cmd for run app
+    # >docker run -it --rm -p 8080:80 todo:v1.0
+    # build and run single service
+    # docker-compose up -d --force-recreate --no-deps --build <service_name>
+    image: docker.io/library/todo:v1.0
+    #build:
+    #  context: .
+    #  dockerfile: server-side/WebApiRestful/Dockerfile
+    container_name: todo-v1.0
+    depends_on:
+      - "db"
+    ports:
+      - "8080:80"
+    environment:
+      - "CONNECTION_STRING=..."
+      - "ASP_NET_CORE_URL=http://+:80"
+    networks:
+      - dev
+
+  # database
+  db:
+    image: postgres:latest
+    container_name: db
+    # automatically restarts the container - Docker deamon on restart network_mode: 
+    # the container itself is manually restarted
+    restart: always
+    environment:
+      - "POSTGRES_USER=root"
+      - "POSTGRES_PASSWORD=@Pas5word"
+      - "POSTGRES_DB=todo"
+    networks:
+      - default
+      - service-proxy
+    ports:
+      - "5050:5432"
+    volumes:
+      - "./db/data:/var/lib/postgresql/data"
+
+  # tool
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin4
+    restart: always
+    environment:
+      - "PGADMIN_DEFAULT_EMAIL=root@root.com"
+      - "PGADMIN_DEFAULT_PASSWORD=@Pas5word"
+    # PGADMIN_LISTEN_PORT = 80
+    ports:
+      - "5051:80"
+    volumes:
+      - "./db/pgadmin:/var/lib/pgadmin"

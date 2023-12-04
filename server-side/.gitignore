@@ -1,0 +1,15 @@
+.dockerignore
+.vs/
+.DS_Store
+_*
+WebApiRestful/bin/
+WebApiRestful/obj/
+WebApiRestful/.DS_Store
+WebApiRestful.Data/obj/
+WebApiRestful.Data/.DS_Store
+WebApiRestful.Domain/obj/
+WebApiRestful.Domain/.DS_Store
+WebApiRestful.Infrastructure/obj/
+WebApiRestful.Infrastructure/.DS_Store
+WebApiRestful.Service/obj/
+WebApiRestful.Service/.DS_Store

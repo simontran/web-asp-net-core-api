@@ -1,0 +1,44 @@
+﻿using FluentMigrator.Runner;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using System.Reflection;
+using WebApiRestful.Data.DbContext;
+using WebApiRestful.Data.Repositories.Component;
+using WebApiRestful.Service.Component;
+
+namespace WebApiRestful.Infrastructure.Configuration
+{
+    public static class ServiceConfiguration
+    {
+        /// <summary>
+        /// Configure DI for application services
+        /// </summary>
+        /// <param name="services"></param>
+        /// <param name="configuration"></param>
+        public static void AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
+        {
+            // DataContext
+            services.AddSingleton<NpgDbContext>();
+
+            // Ensure tables exist
+            services.AddLogging(c => c.AddFluentMigratorConsole())
+                .AddFluentMigratorCore()
+                .ConfigureRunner(c => c.AddPostgres()
+                .WithGlobalConnectionString(configuration.ToString())
+                .ScanIn(Assembly.GetExecutingAssembly()).For.Migrations());
+
+            // AutoMapper
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+            // UnitOfWork
+            services.AddTransient<IUnitOfWork, UnitOfWork>();
+
+            #region Add more Entity at HERE
+            // Todo
+            services.AddTransient<ITodoRepository, TodoRepository>();
+            services.AddScoped<ITodoService, TodoService>();
+
+            #endregion
+        }
+    }
+}

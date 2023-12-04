@@ -1,0 +1,56 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34309.116
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApiRestful", "WebApiRestful\WebApiRestful.csproj", "{EB501524-2D1D-451D-8C5A-58AC70A62589}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApiRestful.Data", "WebApiRestful.Data\WebApiRestful.Data.csproj", "{1DFB6266-A34C-48A8-8599-17565753D5BB}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApiRestful.Domain", "WebApiRestful.Domain\WebApiRestful.Domain.csproj", "{1935AA05-3876-46C1-BDE5-CCA42B711CC7}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApiRestful.Infrastructure", "WebApiRestful.Infrastructure\WebApiRestful.Infrastructure.csproj", "{F8452233-7042-401A-85CF-EC906A0694D2}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApiRestful.Service", "WebApiRestful.Service\WebApiRestful.Service.csproj", "{031404DE-ECCF-4DB2-BC0F-F41459734EA7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WebApiRestful.Helpers", "WebApiRestful.Helpers", "{BD57D657-C0E6-41BF-8DF8-79058AD91245}"
+	ProjectSection(SolutionItems) = preProject
+		..\build.bat = ..\build.bat
+		..\docker-compose.yml = ..\docker-compose.yml
+		..\manual.xlsx = ..\manual.xlsx
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EB501524-2D1D-451D-8C5A-58AC70A62589}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB501524-2D1D-451D-8C5A-58AC70A62589}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB501524-2D1D-451D-8C5A-58AC70A62589}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB501524-2D1D-451D-8C5A-58AC70A62589}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1DFB6266-A34C-48A8-8599-17565753D5BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1DFB6266-A34C-48A8-8599-17565753D5BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1DFB6266-A34C-48A8-8599-17565753D5BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1DFB6266-A34C-48A8-8599-17565753D5BB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1935AA05-3876-46C1-BDE5-CCA42B711CC7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1935AA05-3876-46C1-BDE5-CCA42B711CC7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1935AA05-3876-46C1-BDE5-CCA42B711CC7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1935AA05-3876-46C1-BDE5-CCA42B711CC7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F8452233-7042-401A-85CF-EC906A0694D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F8452233-7042-401A-85CF-EC906A0694D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F8452233-7042-401A-85CF-EC906A0694D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F8452233-7042-401A-85CF-EC906A0694D2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{031404DE-ECCF-4DB2-BC0F-F41459734EA7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{031404DE-ECCF-4DB2-BC0F-F41459734EA7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{031404DE-ECCF-4DB2-BC0F-F41459734EA7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{031404DE-ECCF-4DB2-BC0F-F41459734EA7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {22930905-D260-49B9-8A19-B2137D3A429B}
+	EndGlobalSection
+EndGlobal
