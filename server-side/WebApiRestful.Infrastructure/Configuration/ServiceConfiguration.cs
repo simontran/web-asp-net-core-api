@@ -4,6 +4,8 @@ using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 using WebApiRestful.Data.DbContext;
 using WebApiRestful.Data.Repositories.Component;
+using WebApiRestful.Domain.Entities.Common;
+using WebApiRestful.Infrastructure.Authentication;
 using WebApiRestful.Service.Component;
 
 namespace WebApiRestful.Infrastructure.Configuration
@@ -15,8 +17,11 @@ namespace WebApiRestful.Infrastructure.Configuration
         /// </summary>
         /// <param name="services"></param>
         /// <param name="configuration"></param>
-        public static void AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
+        public static void RegisterDI(this IServiceCollection services, IConfiguration configuration)
         {
+            // Configure strongly typed settings object
+            services.Configure<Database>(configuration.GetSection("DbSettings"));
+
             // DataContext
             services.AddSingleton<NpgDbContext>();
 
@@ -37,6 +42,13 @@ namespace WebApiRestful.Infrastructure.Configuration
             // Todo
             services.AddTransient<ITodoRepository, TodoRepository>();
             services.AddScoped<ITodoService, TodoService>();
+
+            // User
+            services.AddTransient<IUserRepository, UserRepository>();
+            services.AddScoped<IUserService, UserService>();
+
+            // TokenBear
+            services.AddScoped<ITokenHandler, TokenHandler>();
 
             #endregion
         }

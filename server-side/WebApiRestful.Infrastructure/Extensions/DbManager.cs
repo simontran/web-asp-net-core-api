@@ -24,6 +24,7 @@ namespace WebApiRestful.Infrastructure.Extensions
                     _ = dbService.CreateDatabase();
                     #region Add more init tables at HERE
                     tblService.Todos.InitAsync();
+                    tblService.Users.InitAsync();
 
                     #endregion
                 }

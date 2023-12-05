@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using WebApiRestful.Domain.Models;
 using WebApiRestful.Service.Component;
 
-namespace WebApiRestful.Controllers.Todo
+namespace WebApiRestful.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class TodoController(ITodoService service) : ControllerBase
@@ -28,14 +30,14 @@ namespace WebApiRestful.Controllers.Todo
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddNewTodo(TodoCreate model)
+        public async Task<IActionResult> AddNewTodo(CreateTodoModel model)
         {
             await this._service.AddNewTodo(model);
             return Ok(new { message = "Todo created." });
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateTodo(int id, TodoUpdate model)
+        public async Task<IActionResult> UpdateTodo(int id, UpdateTodoModel model)
         {
             await this._service.UpdateTodo(id, model);
             return Ok(new { message = "Todo updated." });

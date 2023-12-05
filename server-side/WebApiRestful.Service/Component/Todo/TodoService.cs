@@ -41,7 +41,7 @@ namespace WebApiRestful.Service.Component
         /// <param name="model"></param>
         /// <returns></returns>
         /// <exception cref="AppException"></exception>
-        public async Task AddNewTodo(TodoCreate model)
+        public async Task AddNewTodo(CreateTodoModel model)
         {
             // Validate
             if (await _repository.GetByNameAsync(model.Name!) != null)
@@ -61,7 +61,7 @@ namespace WebApiRestful.Service.Component
         /// <param name="model"></param>
         /// <returns></returns>
         /// <exception cref="KeyNotFoundException"></exception>
-        public async Task UpdateTodo(int id, TodoUpdate model)
+        public async Task UpdateTodo(int id, UpdateTodoModel model)
         {
             // Check is exist
             var todo = await this._repository.GetByIdAsync(id) ?? throw new KeyNotFoundException("Todo not found.");

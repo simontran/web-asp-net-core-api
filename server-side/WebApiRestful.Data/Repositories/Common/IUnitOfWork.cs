@@ -3,5 +3,6 @@
     public interface IUnitOfWork
     {
         ITodoRepository Todos { get; }
+        IUserRepository Users { get; }
     }
 }

@@ -9,10 +9,10 @@ namespace WebApiRestful.Infrastructure.AutoMapper
         public TodoProfile()
         {
             // CreateRequest -> Todo
-            CreateMap<TodoCreate, Todo>();
+            CreateMap<CreateTodoModel, Todo>();
 
             // UpdateRequest -> Todo
-            CreateMap<TodoUpdate, Todo>()
+            CreateMap<UpdateTodoModel, Todo>()
                 .ForAllMembers(x => x.Condition(
                     (src, dest, prop) =>
                     {

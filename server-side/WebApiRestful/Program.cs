@@ -1,4 +1,3 @@
-using WebApiRestful.Domain.Entities.Common;
 using WebApiRestful.Helpers;
 using WebApiRestful.Infrastructure.Configuration;
 using WebApiRestful.Infrastructure.Extensions;
@@ -16,10 +15,9 @@ var builder = WebApplication.CreateBuilder(args);
     builder.Services.AddSwaggerGen();
 
     #region Add services mores at HERE
-    // Configure strongly typed settings object
-    services.Configure<Database>(config.GetSection("DbSettings"));
     // Configure DI for application services
-    services.AddInfrastructure(config);
+    services.RegisterDI(config);
+    services.RegisterTokenBear(config);
 
     #endregion
 }
@@ -33,6 +31,8 @@ var app = builder.Build();
         app.UseSwagger();
         app.UseSwaggerUI();
     }
+
+    app.UseAuthentication();
 
     app.UseAuthorization();
 

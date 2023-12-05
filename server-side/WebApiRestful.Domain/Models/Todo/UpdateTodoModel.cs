@@ -1,15 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace WebApiRestful.Domain.Models
+﻿namespace WebApiRestful.Domain.Models
 {
-    public class TodoCreate
+    public class UpdateTodoModel
     {
-        [Required]
         public string? Name { get; set; }
 
         public string? Description { get; set; }
 
-        [Required]
         public int? IsComplete { get; set; }
     }
 }

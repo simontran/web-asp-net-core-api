@@ -1,11 +1,12 @@
 ﻿namespace WebApiRestful.Data.Repositories.Component
 {
-    public class UnitOfWork : IUnitOfWork
+    public class UnitOfWork(
+        ITodoRepository todoRepository,
+        IUserRepository userRepository
+        ) : IUnitOfWork
     {
-        public UnitOfWork(ITodoRepository todoRepository)
-        {
-            Todos = todoRepository;
-        }
-        public ITodoRepository Todos { get; }
+        public ITodoRepository Todos { get; } = todoRepository;
+        public IUserRepository Users { get; } = userRepository;
+
     }
 }
