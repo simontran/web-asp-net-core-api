@@ -6,6 +6,7 @@ using WebApiRestful.Service.Component;
 
 namespace WebApiRestful.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class AuthenticationController(IUserService service, ITokenHandler token) : ControllerBase
@@ -23,9 +24,10 @@ namespace WebApiRestful.Controllers
             if (model == null) return BadRequest(new { message = "User is not exist." });
 
             var user = await _service.CheckLogin(model.UserName, model.Password);
-            if (user == null) return Unauthorized();
+            if (user == null)
+                return Unauthorized();
 
-            return await Task.Factory.StartNew(() =>
+            return await Task.Run(() =>
             {
                 return Ok(_token.CreateToken(user));
             });

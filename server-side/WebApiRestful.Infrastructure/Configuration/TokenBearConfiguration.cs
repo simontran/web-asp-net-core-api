@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using WebApiRestful.Domain.Entities.Common;
@@ -24,13 +23,14 @@ namespace WebApiRestful.Infrastructure.Configuration
                 .AddJwtBearer(options =>
                 {
                     options.SaveToken = true;
-                    options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+                    options.TokenValidationParameters = new TokenValidationParameters
                     {
                         ValidIssuer = tokenSettings.Issuer,
                         ValidateIssuer = false,
                         ValidAudience = tokenSettings.Audience,
                         ValidateAudience = false,
-                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(tokenSettings.SigningKey)),
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(tokenSettings.SigningKey ?? "secret-key")),
+                        ValidateIssuerSigningKey = true,
                         ValidateLifetime = true,
                         ClockSkew = TimeSpan.Zero
                     };
@@ -39,7 +39,6 @@ namespace WebApiRestful.Infrastructure.Configuration
                         OnTokenValidated = content =>
                         {
                             var token = content.HttpContext.RequestServices.GetRequiredService<ITokenHandler>();
-
                             return token.ValidateToken(content);
                         },
                         OnAuthenticationFailed = content =>

@@ -28,29 +28,36 @@ namespace WebApiRestful.Infrastructure.Authentication
             var tokenSettings = _configuration.GetSection("TokenBearSettings").Get<TokenBear>();
 
             var claims = new Claim[]
-                {
+            {
+                    // primary key token
                     new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString(), ClaimValueTypes.String, tokenSettings.Issuer),
+                    // token issuer -> server
                     new Claim(JwtRegisteredClaimNames.Iss, tokenSettings.Issuer, ClaimValueTypes.String, tokenSettings.Issuer),
-                    new Claim(JwtRegisteredClaimNames.Iat, DateTimeOffset.UtcNow.ToString(), ClaimValueTypes.Integer64, tokenSettings.Issuer),
-                    new Claim(JwtRegisteredClaimNames.Aud, "SuntacWebApi", ClaimValueTypes.Integer64, tokenSettings.Issuer),
-                    new Claim(JwtRegisteredClaimNames.Exp, DateTimeOffset.Now.AddHours(3).ToString("yyyy/MM/dd HH:mm:ss"), ClaimValueTypes.String, tokenSettings.Issuer),
+                    // allocation time
+                    //new Claim(JwtRegisteredClaimNames.Iat, DateTimeOffset.UtcNow.ToString("yyyy/MM/dd HH:mm:ss"), ClaimValueTypes.Integer64, tokenSettings.Issuer),
+                    // author
+                    new Claim(JwtRegisteredClaimNames.Aud, "TodoWebApi", ClaimValueTypes.String, tokenSettings.Issuer),
+                    // expiry
+                    new Claim(JwtRegisteredClaimNames.Exp, DateTimeOffset.UtcNow.AddMinutes((double)tokenSettings.DurationInMinutes).ToString("yyyy/MM/dd HH:mm:ss"), ClaimValueTypes.String, tokenSettings.Issuer),
+                    // Username
                     new Claim(ClaimTypes.Name, user.UserName.ToString(), ClaimValueTypes.String, tokenSettings.Issuer),
-                };
+            };
 
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(tokenSettings.SigningKey));
-            var credential = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+            // primary key token
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(tokenSettings.SigningKey ?? "secret-key"));
+            // security algorithms
+            var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+            // info
             var tokenInfo = new JwtSecurityToken(
                 issuer: tokenSettings.Issuer,
                 audience: tokenSettings.Audience,
                 claims: claims,
-                notBefore: DateTime.Now,
-                expires: DateTime.Now.AddHours(3),
-                credential
+                expires: DateTime.UtcNow.AddMinutes((double)tokenSettings.DurationInMinutes),
+                notBefore: DateTime.UtcNow,
+                signingCredentials: credentials
                 );
 
-            string token = new JwtSecurityTokenHandler().WriteToken(tokenInfo);
-
-            return await Task.FromResult(token);
+            return await Task.FromResult(new JwtSecurityTokenHandler().WriteToken(tokenInfo));
         }
 
         /// <summary>
@@ -72,6 +79,7 @@ namespace WebApiRestful.Infrastructure.Authentication
                 content.Fail("This token is not issued by point entry.");
                 return;
             }
+
             if (identity.FindFirst(ClaimTypes.Name) == null)
             {
                 string username = identity.FindFirst(ClaimTypes.Name).Value;
@@ -82,6 +90,11 @@ namespace WebApiRestful.Infrastructure.Authentication
                     content.Fail("This token is invalid for user.");
                     return;
                 }
+            }
+
+            if (identity.FindFirst(JwtRegisteredClaimNames.Exp) == null)
+            {
+                var dateExp = identity.FindFirst(JwtRegisteredClaimNames.Exp);
             }
         }
     }
