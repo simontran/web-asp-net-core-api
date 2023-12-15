@@ -1,3 +1,6 @@
 .github
 .DS_Store
-db/
+app/
+/server-side/WebApiRestful/*.user
+/server-side/WebApiRestful/.config
+/server-side/WebApiRestful/Properties/PublishProfiles/*.user

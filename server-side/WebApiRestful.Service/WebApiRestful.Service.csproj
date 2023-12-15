@@ -4,7 +4,7 @@
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <BaseOutputPath>C:\Users\d_tu\Desktop\web-asp-net-core-api\server-side\WebApiRestful\bin</BaseOutputPath>
+    <BaseOutputPath>..\WebApiRestful\bin</BaseOutputPath>
     <BaseIntermediateOutputPath>obj\</BaseIntermediateOutputPath>
   </PropertyGroup>
 

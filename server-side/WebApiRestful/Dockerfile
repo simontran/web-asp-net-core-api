@@ -9,6 +9,10 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["WebApiRestful/WebApiRestful.csproj", "WebApiRestful/"]
+COPY ["WebApiRestful.Infrastructure/WebApiRestful.Infrastructure.csproj", "WebApiRestful.Infrastructure/"]
+COPY ["WebApiRestful.Data/WebApiRestful.Data.csproj", "WebApiRestful.Data/"]
+COPY ["WebApiRestful.Domain/WebApiRestful.Domain.csproj", "WebApiRestful.Domain/"]
+COPY ["WebApiRestful.Service/WebApiRestful.Service.csproj", "WebApiRestful.Service/"]
 RUN dotnet restore "./WebApiRestful/./WebApiRestful.csproj"
 COPY . .
 WORKDIR "/src/WebApiRestful"

@@ -36,16 +36,16 @@ namespace WebApiRestful.Infrastructure.Configuration
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
             // UnitOfWork
-            services.AddTransient<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             #region Add more Entity at HERE
             // Todo
             services.AddTransient<ITodoRepository, TodoRepository>();
-            services.AddScoped<ITodoService, TodoService>();
+            services.AddTransient<ITodoService, TodoService>();
 
             // User
             services.AddTransient<IUserRepository, UserRepository>();
-            services.AddScoped<IUserService, UserService>();
+            services.AddTransient<IUserService, UserService>();
 
             // TokenBear
             services.AddScoped<ITokenHandler, TokenHandler>();

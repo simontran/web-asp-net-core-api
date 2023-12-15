@@ -3,16 +3,17 @@ version: '3.4'
 networks:
   dev:
     driver: bridge
-  service-proxy:
-volumes:
-  db:
-    driver: local
-  pgadmin:
-    driver: local
+# volumes:
+#   app:
+#     driver: local
+#   db:
+#     driver: local
+#   pgadmin:
+#     driver: local
 
 services:
-  # app
-  webapi:
+  # webapi
+  app:
     # cmd for get image
     # >docker build -f server-side/WebApiRestful/Dockerfile -t todo:v1.0 .
     # cmd for run app
@@ -20,17 +21,19 @@ services:
     # build and run single service
     # docker-compose up -d --force-recreate --no-deps --build <service_name>
     image: docker.io/library/todo:v1.0
-    #build:
-    #  context: .
-    #  dockerfile: server-side/WebApiRestful/Dockerfile
-    container_name: todo-v1.0
+    build:
+     context: .
+     dockerfile: Dockerfile
+    container_name: app
     depends_on:
       - "db"
     ports:
       - "8080:80"
-    environment:
-      - "CONNECTION_STRING=..."
-      - "ASP_NET_CORE_URL=http://+:80"
+    # environment:
+    #   - "CONNECTION_STRING=..."
+    #   - "ASP_NET_CORE_URL=http://+:80"
+    volumes:
+      - "./app/publish:/app/publish"
     networks:
       - dev
 
@@ -46,12 +49,11 @@ services:
       - "POSTGRES_PASSWORD=@Pas5word"
       - "POSTGRES_DB=todo"
     networks:
-      - default
-      - service-proxy
+      - dev
     ports:
       - "5050:5432"
     volumes:
-      - "./db/data:/var/lib/postgresql/data"
+      - "./app/db/data:/var/lib/postgresql/data"
 
   # tool
   pgadmin:
@@ -65,4 +67,4 @@ services:
     ports:
       - "5051:80"
     volumes:
-      - "./db/pgadmin:/var/lib/pgadmin"
+      - "./app/db/pgadmin:/var/lib/pgadmin"

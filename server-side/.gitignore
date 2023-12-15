@@ -4,6 +4,7 @@
 _*
 WebApiRestful/bin/
 WebApiRestful/obj/
+WebApiRestful/.config/
 WebApiRestful/.DS_Store
 WebApiRestful.Data/obj/
 WebApiRestful.Data/.DS_Store
